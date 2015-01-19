@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+              xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config http://xmlns.oracle.com/coherence/coherence-cache-config/1.2/coherence-cache-config.xsd">
+ 
+  
+  
+  <defaults>
+   <serializer>pof</serializer>
+  </defaults>
+   
+  <caching-scheme-mapping>
+    <cache-mapping>
+      <cache-name>NodoPersona-cache</cache-name>
+      <scheme-name>near</scheme-name>
+    </cache-mapping>
+    <cache-mapping>
+      <cache-name>Other-cache</cache-name>
+      <scheme-name>near</scheme-name>
+    </cache-mapping>
+  </caching-scheme-mapping>
+  
+  <caching-schemes>
+  
+     <distributed-scheme>
+      <scheme-name>my-distributed</scheme-name>
+      <service-name>my-distributedService</service-name>
+       <backup-count>1</backup-count>
+      <backing-map-scheme>
+        <local-scheme/>
+      </backing-map-scheme>
+      <autostart>true</autostart>
+    </distributed-scheme>
+	<local-scheme>
+      <scheme-name>example-local</scheme-name>
+    </local-scheme>
+  
+	<near-scheme>
+	  <scheme-name>near</scheme-name>
+	  <front-scheme>
+			<local-scheme/>
+	  </front-scheme>
+	  <back-scheme>
+	    <distributed-scheme>
+	      <scheme-ref>my-distributed</scheme-ref>
+	    </distributed-scheme>
+	  </back-scheme>
+	</near-scheme>  
+  
+  </caching-schemes>
+</cache-config>
